@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ViajaAI",
+    "name": "TreinaAI",
     "slug": "ViajaAI",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,10 +18,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jooj_hd.ViajaAI"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7dfc8123-3006-43df-9cfd-f352402e4581"
+      }
     }
   }
 }

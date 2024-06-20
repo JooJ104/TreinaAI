@@ -7,7 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 
 const statusBarHeight = StatusBar.currentHeight;
-const KEY_GPT = 'sk-proj-9JjboNGiLqEIWQC5aU2lT3BlbkFJeGLjDrOOn7gI5bMMrsxC';
+const KEY_GPT = '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';
 
 export default function App() {
 
@@ -18,7 +18,7 @@ export default function App() {
 
   async function handleGenerate() {
     if (city === "") {
-      Alert.alert("Atenção", "Preencha o nome da cidade!")
+      Alert.alert("Atenção", "Preencha preencha o grupo muscular do treino!")
       return;
     }
 
@@ -26,14 +26,14 @@ export default function App() {
     setLoading(true);
     Keyboard.dismiss();
 
-    const prompt = `Crie um roteiro para uma viagem de exatos ${days.toFixed(0)} dias na cidade de ${city}, busque por lugares turisticos, lugares mais visitados, seja preciso nos dias de estadia fornecidos e limite o roteiro apenas na cidade fornecida. Forneça apenas em tópicos com nome do local onde ir em cada dia.`
+    const prompt = ` Crie uma rotina de treios para alguem que vai na academia ${days.toFixed(0)} dias na semana, com o foco nesta região muscular: ${city}`
 
     fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${KEY_GPT}`
-      },
+      },              
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
         messages: [
@@ -64,18 +64,18 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" translucent={true} backgroundColor="#F1F1F1" />
-      <Text style={styles.heading}>Viaja AI</Text>
+      <Text style={styles.heading}>Treina AI</Text>
 
       <View style={styles.form}>
-        <Text style={styles.label}>Cidade destino</Text>
+        <Text style={styles.label}>Grupo muscular</Text>
         <TextInput
-          placeholder="Ex: Suzano, SP"
+          placeholder="EX: Dorsal ou inferiores"
           style={styles.input}
           value={city}
           onChangeText={(text) => setCity(text)}
         />
 
-        <Text style={styles.label}>Tempo de estadia: <Text style={styles.days}> {days.toFixed(0)} </Text> dias</Text>
+        <Text style={styles.label}>Treinos na semana: <Text style={styles.days}> {days.toFixed(0)} </Text> dias</Text>
         <Slider
           minimumValue={1}
           maximumValue={7}
@@ -87,21 +87,21 @@ export default function App() {
       </View>
 
       <Pressable style={styles.button} onPress={handleGenerate}>
-        <Text style={styles.buttonText}>Gerar roteiro</Text>
-        <MaterialIcons name="travel-explore" size={24} color="#FFF" />
+        <Text style={styles.buttonText}>Gerar treino</Text>
+        <MaterialIcons name="fitness-center" size={24} color="#FFF" />
       </Pressable>
 
       <ScrollView contentContainerStyle={{ paddingBottom: 24, marginTop: 4, }} style={styles.containerScroll} showsVerticalScrollIndicator={false} >
         {loading && (
           <View style={styles.content}>
-            <Text style={styles.title}>Carregando roteiro...</Text>
+            <Text style={styles.title}>Carregando treino...</Text>
             <ActivityIndicator color="#000" size="large" />
           </View>
         )}
 
         {travel && (
           <View style={styles.content}>
-            <Text style={styles.title}>Roteiro da viagem 👇</Text>
+            <Text style={styles.title}>Exercícios 👇</Text>
             <Text style={{ lineHeight: 24, }}>{travel}</Text>
           </View>
         )}
